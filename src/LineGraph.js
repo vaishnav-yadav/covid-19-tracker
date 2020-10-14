@@ -69,7 +69,7 @@ const options = {
   };
   
 
-function LineGraph({casesType="cases" ,...props }) {
+function LineGraph({casesType ,...props }) {
 const [data , setData] =useState({}); 
 
 useEffect(() => {
@@ -88,8 +88,9 @@ useEffect(() => {
 
     fetchData();
   }, [casesType]);
-
-
+    
+  let bgcolor =( casesType==='recovered') ? '#ADFF2F' : "rgba(204, 16, 52, 0.5)";
+  let bordercolor = (casesType==='recovered') ? 'green' : "#CC1034";
 
     return (
         <div className={props.className}>
@@ -97,9 +98,9 @@ useEffect(() => {
           <Line
             data={{
               datasets: [
-                {
-                  backgroundColor: "rgba(204, 16, 52, 0.5)",
-                  borderColor: "#CC1034",
+                { 
+                  backgroundColor: bgcolor,
+                  borderColor:bordercolor,
                   data: data,
                 },
               ],
