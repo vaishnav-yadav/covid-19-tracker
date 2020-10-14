@@ -103,23 +103,24 @@ function App() {
           </FormControl>
         </div>
         <div className="app__stats">
-          <InfoBox
+          <InfoBox onClick={e=> setCasesType("cases")}
             title="Coroddnavirus Cases"
             cases={prettyPrintStat(countryInfo.todayCases)}
             total={prettyPrintStat(countryInfo.cases)}
           />
-          <InfoBox
+          <InfoBox onClick={e=> setCasesType("recovered")}
             title="Recovered"
             cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={prettyPrintStat(countryInfo.recovered)}
           />
-          <InfoBox
+          <InfoBox onClick={e=> setCasesType("deaths")}
             title="Deaths"
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={prettyPrintStat(countryInfo.deaths)}
           />
         </div>
         <Map
+          
           center={mapCenter}
           zoom={mapZoom}
           countries={mapCountries}
@@ -130,9 +131,9 @@ function App() {
         <CardContent>
           <h3>Live cases by country</h3>
           <Table countries={tableData} />
-          <h3>Worldwide new cases</h3>
+          <h3>Worldwide new {casesType}</h3>
           {/*Graph */}
-          <LineGraph />
+          <LineGraph casesType={casesType}/>
         </CardContent>
       </Card>
     </div>
