@@ -3,6 +3,7 @@ import "./App.css";
 import { Card, CardContent, FormControl, MenuItem, Select } from "@material-ui/core";
 import InfoBox from "./Infobox";
 import Map from "./Map";
+import Table from './Table';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -11,6 +12,7 @@ function App() {
   
   //setting countryInfo data that we got from the api call, we convereted it in object through .json() and then storing data in countryInfo 
   const [countryInfo, setCountryInfo] = useState({});
+  const [tableData, setTableData] =useState([]);
  
 
 
@@ -36,6 +38,7 @@ function App() {
             name: country.country, // United States country name
             value: country.countryInfo.iso2, //USA country code
           }));
+          setTableData(data);
           setCountries(countries);
         });
     };
@@ -61,16 +64,14 @@ function App() {
  
 
     });
-    //https://disease.sh/v3/covid-19/all
-    //https://disease.sh/v3/covid-19/countries/[COUNTRY_CODE]
-
+    
   };
     console.log('country info' , countryInfo)
 
+    
 
-
-  return (
-    <div className="app">
+    return (
+      <div className="app">
       <div className="app__left">
         <div className="app__header">
           <h1>COVID-19 TRACKER</h1>
@@ -102,7 +103,7 @@ function App() {
       <Card className="app__right">
         <CardContent>
           <h3>Live cases by country</h3>
-          {/* Table*/}
+          <Table countries = {tableData}/>
           <h3>Worldwide new cases</h3>
          { /*Graph */}
         </CardContent>
@@ -113,12 +114,18 @@ function App() {
 
 export default App;
 
+
+
+
+
+//https://disease.sh/v3/covid-19/all  :- worldwide 
+//https://disease.sh/v3/covid-19/countries/[COUNTRY_CODE]
 // response :-
 // {
-//   "updated": 1602654741421,
-//   "country": "Afghanistan",
-//   "countryInfo": {
-//       "_id": 4,
+  //   "updated": 1602654741421,
+  //   "country": "Afghanistan",
+  //   "countryInfo": {
+    //       "_id": 4,
 //       "iso2": "AF",
 //       "iso3": "AFG",
 //       "lat": 33,
