@@ -11,8 +11,8 @@ import InfoBox from "./Infobox";
 import Map from "./Map";
 import Table from "./Table";
 import { sortData } from "./util";
-import LineGraph from './LineGraph';
-import 'leaflet/dist/leaflet.css';
+import LineGraph from "./LineGraph";
+import "leaflet/dist/leaflet.css";
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -23,10 +23,10 @@ function App() {
   const [countryInfo, setCountryInfo] = useState({});
   const [tableData, setTableData] = useState([]);
 
-
-  useState({lat : 34.80746 , lng : -40.4796 });
-  const [mapZoom , setMapZoom] =useState(3);
-  
+  const [mapCenter, setMapCenter] = useState({ lat: 34.80746, lng: -40.4796 });
+  const [mapZoom, setMapZoom] = useState(3);
+  const [mapCountries, setMapCountries] = useState([]);
+  const [casesType, setCasesType] = useState("cases");
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
       .then((response) => response.json())
@@ -50,7 +50,7 @@ function App() {
           }));
 
           const sortedData = sortData(data);
-
+          setMapCountries(data);
           setTableData(sortedData);
           setCountries(countries);
         });
@@ -77,6 +77,8 @@ function App() {
         // All of the data
         // from the country response
         setCountryInfo(data);
+        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        setMapZoom(4);
       });
   };
   console.log("country info", countryInfo);
@@ -117,8 +119,12 @@ function App() {
             total={countryInfo.deaths}
           />
         </div>
-        <Map center={mapCenter}
-            zoom ={mapZoom}></Map>
+        <Map
+          center={mapCenter}
+          zoom={mapZoom}
+          countries={mapCountries}
+          casesType={casesType}
+        ></Map>
       </div>
       <Card className="app__right">
         <CardContent>
@@ -126,7 +132,7 @@ function App() {
           <Table countries={tableData} />
           <h3>Worldwide new cases</h3>
           {/*Graph */}
-          <LineGraph/>
+          <LineGraph />
         </CardContent>
       </Card>
     </div>
