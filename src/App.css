@@ -10,7 +10,7 @@ body{
    display: flex;
    justify-content: space-evenly;
    padding: 20px;
-   
+    
 }
 .app__header{
   display: flex;
@@ -19,8 +19,20 @@ body{
   margin-bottom: 20px;
 }
 
+.app__left{
+  /*  i want app left will take 90% of the screen width  */
+  flex:0.9;
+}
 
 .app__stats{
   display: flex;
   justify-content: space-between;
+}
+
+/* when the screen goes past 990px apply following :-  */
+
+@media (max-width : 990px){
+  .app{
+    flex-direction: column;
+  }
 }

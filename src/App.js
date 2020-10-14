@@ -63,7 +63,7 @@ function App() {
         {/* Header */}
         {/* Title + select input drpodown field */}
         {/* map */}
-        <Map />
+        <Map ></Map>
       </div>
       <Card className="app__right">
         <CardContent>
