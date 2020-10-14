@@ -9,11 +9,11 @@ function Infobox({title , cases , total }) {
                <Typography className="infoBox__title" color="textSecondary">
                    {title}
                </Typography>
-               <h2 className="infoBox__cases">{cases}</h2>
+               Today : <h2 className="infoBox__cases">{cases}</h2>
                {/* 120k no. of cases*/}
                {/* Title 1.2M total  */}
                <Typography className="infoBox__total" color="textSecondary">
-                   {total}
+                  Total : {total}
                </Typography>
            </CardContent>
        </Card>

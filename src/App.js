@@ -10,6 +10,8 @@ function App() {
   const [country, setCountry] = useState("Worldwide");
   const [countryInfo, setCountryInfo] = useState({});
 
+ 
+
 
   useEffect(() => {
     //run once when app loads
@@ -77,9 +79,9 @@ function App() {
           </FormControl>
         </div>
         <div className="app__stats">
-          <InfoBox title="Coronavirus Cases" cases={12121} total={3000} />
-          <InfoBox title="Recovered" cases={12121} total={200} />
-          <InfoBox title="Deaths" cases={12121} total={20000} />
+          <InfoBox title="Coronavirus Cases" cases={countryInfo.todayCases} total={countryInfo.cases} />
+          <InfoBox title="Recovered" cases={countryInfo.todayRecovered} total={countryInfo.recovered} />
+          <InfoBox title="Deaths" cases={countryInfo.todayDeaths} total={countryInfo.deaths} />
         </div>
 
         {/* Header */}
