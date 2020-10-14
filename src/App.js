@@ -65,7 +65,7 @@ function App() {
     setCountry(countryCode);
 
     const url =
-      countryCode === "worldwide"
+      countryCode === "Worldwide"
         ? "https://disease.sh/v3/covid-19/all"
         : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
 
@@ -103,17 +103,26 @@ function App() {
           </FormControl>
         </div>
         <div className="app__stats">
-          <InfoBox onClick={e=> setCasesType("cases")}
+          <InfoBox 
+           isRed
+            active={casesType==='cases'}
+            onClick={e=> setCasesType("cases")}
             title="Coroddnavirus Cases"
             cases={prettyPrintStat(countryInfo.todayCases)}
             total={prettyPrintStat(countryInfo.cases)}
           />
-          <InfoBox onClick={e=> setCasesType("recovered")}
+          <InfoBox
+           
+            active={casesType==='recovered'}
+            onClick={e=> setCasesType("recovered")}
             title="Recovered"
             cases={prettyPrintStat(countryInfo.todayRecovered)}
             total={prettyPrintStat(countryInfo.recovered)}
           />
-          <InfoBox onClick={e=> setCasesType("deaths")}
+          <InfoBox 
+           isRed
+            active={casesType==='deaths'}
+            onClick={e=> setCasesType("deaths")}
             title="Deaths"
             cases={prettyPrintStat(countryInfo.todayDeaths)}
             total={prettyPrintStat(countryInfo.deaths)}
