@@ -1,6 +1,9 @@
 import React, { useState ,useEffect } from "react";
 import "./App.css";
 import { FormControl, MenuItem, Select } from "@material-ui/core";
+import InfoBox from './Infobox';
+
+
 function App() {
   const [countries, setCountries] = useState([]);
   //by default selected country will be worldwide  
@@ -49,12 +52,19 @@ function App() {
           </Select>
         </FormControl>
       </div>
+      <div className ="app__stats">
+        <InfoBox title="Coronavirus Cases" cases={12121} total={3000}/>
+        <InfoBox title="Recovered" cases={12121} total={200}/>
+        <InfoBox title="Deaths" cases={12121} total={20000}/>
+
+      {/* info boxs title="corona virus cases "*/}
+      {/* info boxs title ="coronavirus recoveries"*/}
+      {/* info boxs */}
+      </div>
 
       {/* Header */}
       {/* Title + select input drpodown field */}
-      {/* info boxs */}
-      {/* info boxs */}
-      {/* info boxs */}
+     
       {/* TABLE */}
       {/* graph  */}
       {/* map */}
