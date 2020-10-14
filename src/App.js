@@ -8,9 +8,19 @@ function App() {
   const [countries, setCountries] = useState([]);
   //by default selected country will be worldwide
   const [country, setCountry] = useState("Worldwide");
+  
+  //setting countryInfo data that we got from the api call, we convereted it in object through .json() and then storing data in countryInfo 
   const [countryInfo, setCountryInfo] = useState({});
-
  
+
+
+  useEffect(() =>{
+    fetch('https://disease.sh/v3/covid-19/all')
+    .then((response) => response.json())
+    .then((data)=>{
+       setCountryInfo(data);
+    })
+  } , []);
 
 
   useEffect(() => {
@@ -51,8 +61,8 @@ function App() {
  
 
     });
-    //https://disease.sh/v3.covid-19/all
-    //https://disease.sh/v3.covid-19/countries/[COUNTRY_CODE]
+    //https://disease.sh/v3/covid-19/all
+    //https://disease.sh/v3/covid-19/countries/[COUNTRY_CODE]
 
   };
     console.log('country info' , countryInfo)
