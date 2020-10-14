@@ -95,6 +95,7 @@ function App() {
       <div className="app__left">
         <div className="app__header">
           <h1>COVID-19 TRACKER</h1>
+          <h3>👑 VAISHNAV YADAV 🔥</h3>
           <FormControl className="app__dropdown">
             <Select
               variant="outlined"
@@ -102,7 +103,7 @@ function App() {
               onChange={onCountryChange}
             >
               {/* loop through all the countries and show a dropdwon list of options  */}
-              <MenuItem value="worldwide"  >Worldwide</MenuItem>
+              <MenuItem value="worldwide">Worldwide</MenuItem>
               {countries.map((country) => (
                 <MenuItem value={country.value}>{country.name}</MenuItem>
               ))}
