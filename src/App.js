@@ -8,6 +8,8 @@ function App() {
   const [countries, setCountries] = useState([]);
   //by default selected country will be worldwide
   const [country, setCountry] = useState("Worldwide");
+  const [countryInfo, setCountryInfo] = useState({});
+
 
   useEffect(() => {
     //run once when app loads
@@ -29,11 +31,31 @@ function App() {
     getCountriesData(); //calling the getCountriesData()func , so every time app loads this func will run and gonna fetch the latest covid 19 data
   }, []);
 
-  const onCountryChange = (event) => {
+  const onCountryChange = async (event) => {
     const countryCode = event.target.value;
-    console.log(countryCode);
+    // console.log(countryCode);
     setCountry(countryCode);
+
+
+   const url = countryCode === 'worldwide' ? 'https://disease.sh/v3/covid-19/all' :    `https://disease.sh/v3/covid-19/countries/${countryCode}`
+    
+    await fetch(url).then(response =>response.json())
+    .then((data)=>{
+      setCountry(countryCode);
+      
+      // All of the data
+      // from the country response 
+      setCountryInfo(data);
+ 
+
+    });
+    //https://disease.sh/v3.covid-19/all
+    //https://disease.sh/v3.covid-19/countries/[COUNTRY_CODE]
+
   };
+    console.log('country info' , countryInfo)
+
+
 
   return (
     <div className="app">
