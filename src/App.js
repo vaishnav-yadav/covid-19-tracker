@@ -4,6 +4,7 @@ import { Card, CardContent, FormControl, MenuItem, Select } from "@material-ui/c
 import InfoBox from "./Infobox";
 import Map from "./Map";
 import Table from './Table';
+import {sortData} from './util';
 
 function App() {
   const [countries, setCountries] = useState([]);
@@ -38,7 +39,10 @@ function App() {
             name: country.country, // United States country name
             value: country.countryInfo.iso2, //USA country code
           }));
-          setTableData(data);
+
+          const sortedData = sortData(data);
+
+          setTableData(sortedData);
           setCountries(countries);
         });
     };
