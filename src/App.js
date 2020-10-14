@@ -17,7 +17,7 @@ import "leaflet/dist/leaflet.css";
 function App() {
   const [countries, setCountries] = useState([]);
   //by default selected country will be worldwide
-  const [country, setCountry] = useState("Worldwide");
+  const [country, setInputCountry] = useState("worldwide");
 
   //setting countryInfo data that we got from the api call, we convereted it in object through .json() and then storing data in countryInfo
   const [countryInfo, setCountryInfo] = useState({});
@@ -27,12 +27,18 @@ function App() {
   const [mapZoom, setMapZoom] = useState(3);
   const [mapCountries, setMapCountries] = useState([]);
   const [casesType, setCasesType] = useState("cases");
+
+
+
+  
   useEffect(() => {
     fetch("https://disease.sh/v3/covid-19/all")
       .then((response) => response.json())
       .then((data) => {
         setCountryInfo(data);
+        
       });
+      
   }, []);
 
   useEffect(() => {
@@ -49,7 +55,7 @@ function App() {
             value: country.countryInfo.iso2, //USA country code
           }));
 
-          const sortedData = sortData(data);
+          let sortedData = sortData(data);
           setMapCountries(data);
           setTableData(sortedData);
           setCountries(countries);
@@ -62,22 +68,23 @@ function App() {
   const onCountryChange = async (event) => {
     const countryCode = event.target.value;
     // console.log(countryCode);
-    setCountry(countryCode);
+    
 
     const url =
-      countryCode === "Worldwide"
+      countryCode === "worldwide"
         ? "https://disease.sh/v3/covid-19/all"
         : `https://disease.sh/v3/covid-19/countries/${countryCode}`;
 
     await fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        setCountry(countryCode);
+      
 
         // All of the data
         // from the country response
+        setInputCountry(countryCode);
         setCountryInfo(data);
-        setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
+        (countryCode === "worldwide")? setMapCenter({ lat: 34.80746, lng: -40.4796 }) : setMapCenter([data.countryInfo.lat, data.countryInfo.long]);
         setMapZoom(4);
       });
   };
@@ -95,7 +102,7 @@ function App() {
               onChange={onCountryChange}
             >
               {/* loop through all the countries and show a dropdwon list of options  */}
-              <MenuItem value="Worldwide">Worldwide</MenuItem>
+              <MenuItem value="worldwide"  >Worldwide</MenuItem>
               {countries.map((country) => (
                 <MenuItem value={country.value}>{country.name}</MenuItem>
               ))}
