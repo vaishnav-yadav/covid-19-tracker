@@ -14,7 +14,7 @@ function Infobox({title , cases ,isRed, active, total,...props }) {
                {/* 120k no. of cases*/}
                {/* Title 1.2M total  */}
                <Typography className="infoBox__total" color="textSecondary">
-                  Total : {total}
+                  <h1>Total : {total}</h1>
                </Typography>
            </CardContent>
        </Card>

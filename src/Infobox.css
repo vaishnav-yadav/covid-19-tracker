@@ -38,3 +38,26 @@
     margin-top: 15px !important;
   }
   
+ 
+@media (max-width : 990px){
+  .app{
+    flex-direction: column;
+  }
+  .app__right{
+    margin-top: 15px;
+  }
+}
+@media (max-width : 700px){
+  .app__header{
+    flex-direction: column;
+  }
+  .app__header > h1 {
+    margin:3px 0px;
+  }
+  .app__header > h3 {
+    margin: 5px 0px;
+  }
+}
+
+
+  
